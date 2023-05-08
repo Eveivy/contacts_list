@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import ContactList from './Component/ContactList'
 
-function App() { 
+function App() {
 
   return (
     <div className="App">
-    <h1>Contacts List</h1>
+      <h1 className='display-6 my-5'>Contacts List</h1>
+      <ContactList/>
     </div>
   )
 }

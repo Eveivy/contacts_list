@@ -3,5 +3,9 @@
   src: url(/src/assets/PPNeueMachina-PlainUltrabold.otf);
 }
 body{
-  font-family: 'Neue Machina';
+  font-family: 'Neue Machina' !important;
+  display: flex;
+  /* flex-direction: column; */
+  align-self: center;
+  justify-content: center;
 }
