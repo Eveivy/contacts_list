@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'Neue Machina';
+  src: url(/src/assets/PPNeueMachina-PlainUltrabold.otf);
+}
+body{
+  font-family: 'Neue Machina';
+}
