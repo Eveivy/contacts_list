@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import 'boxicons'
+import 'boxicons';
+import { nanoid } from 'nanoid';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,14 +8,15 @@ import ContactList from './Component/ContactList';
 
 function App() {
   const [showForm, setShowForm] = useState(false)
-  const [contact, setContact] = useState({
+  const [contactInfo, setContactInfo] = useState({
     name: '',
-    number: ''
+    number: '',
+    id: ''
   })
   const [contacts, setContacts] = useState(localStorage.getItem('contacts') == null ? [] : JSON.parse(localStorage.getItem('contacts')))
 
-  function handleChange(ev) {
-    setContact(prevContact => {
+  function handleChange(ev) {  
+    setContactInfo(prevContact => {
       return {
         ...prevContact,
         [ev.target.name]: ev.target.value
@@ -23,9 +25,10 @@ function App() {
   }
 
   function addContact() {
+    contactInfo.id = nanoid()
     setContacts(prevContacts => {
       return [
-        ...prevContacts, contact
+        ...prevContacts, contactInfo
       ]
     })
   }
@@ -52,10 +55,10 @@ function App() {
         showForm ? <Form className='mb-4'>
           <Container className='d-flex align-items-center'>
             <Form.Group className="mb-3 me-2">
-              <Form.Control type="text" placeholder="Name" className='text-dark input' name='name' value={contact.name} onChange={handleChange} />
+              <Form.Control type="text" placeholder="Name" className='text-dark input' name='name' value={contactInfo.name} onChange={handleChange} />
             </Form.Group>
             <Form.Group className="mb-3 ms-2">
-              <Form.Control type="tel" placeholder="Phone Number" className='text-dark input' name='number' value={contact.number} onChange={handleChange} />
+              <Form.Control type="tel" placeholder="Phone Number" className='text-dark input' name='number' value={contactInfo.number} onChange={handleChange} />
             </Form.Group>
           </Container>
           <div className="d-flex justify-content-center align-items-center mt-3">
