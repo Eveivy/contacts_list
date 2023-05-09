@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useRef } from 'react';
 import 'boxicons';
 import { nanoid } from 'nanoid';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ContactList from './Component/ContactList';
+
+export const LevelContext = createContext([])
 
 function App() {
   const [showForm, setShowForm] = useState(false)
@@ -14,6 +16,7 @@ function App() {
     id: ''
   })
   const [contacts, setContacts] = useState(localStorage.getItem('contacts') == null ? [] : JSON.parse(localStorage.getItem('contacts')))
+  const formRef = useRef(null);
 
   function handleChange(ev) {  
     setContactInfo(prevContact => {
@@ -21,7 +24,8 @@ function App() {
         ...prevContact,
         [ev.target.name]: ev.target.value
       }
-    })
+    });
+    formRef.current.reset();
   }
 
   function addContact() {
@@ -37,6 +41,11 @@ function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
+  function handleDelete(ev, elId){
+      setContacts((current) =>
+      current.filter((contact) => contact.id !== elId)
+    );
+  }
   
 
   return (
@@ -52,7 +61,7 @@ function App() {
         }
       </Button>
       {
-        showForm ? <Form className='mb-4'>
+        showForm ? <Form className='mb-4' ref={formRef}>
           <Container className='d-flex align-items-center'>
             <Form.Group className="mb-3 me-2">
               <Form.Control type="text" placeholder="Name" className='text-dark input' name='name' value={contactInfo.name} onChange={handleChange} />
@@ -66,7 +75,9 @@ function App() {
           </div>
         </Form> : ''
       }
-      <ContactList contacts={contacts}/>
+      <LevelContext.Provider value={[contacts, handleDelete]}>
+          <ContactList />      
+      </LevelContext.Provider>
     </Container>
   )
 }

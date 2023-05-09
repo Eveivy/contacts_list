@@ -11,7 +11,7 @@ body{
 }
 .border-purple{
   border: 3px solid purple;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .list{
   width: 600px !important;
@@ -35,4 +35,7 @@ body{
   background-color: purple !important;
   font-size: 15px;
   color: white;
+}
+.pointer{
+  cursor: pointer;
 }
