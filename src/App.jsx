@@ -21,7 +21,7 @@ function App() {
   const [showUpdateBtn, setShowUpdateBtn] = useState(false)
   const formRef = useRef(null);
 
-  console.log(formRef)
+ 
 
   const sortedContacts = contacts.sort((a, b) => {
     const hasUpdatedAt = contacts.some((cd) => cd.hasOwnProperty("updatedAt"));
@@ -40,11 +40,14 @@ function App() {
         [ev.target.name]: ev.target.value
       }
     });
+ 
   }
 
   function addContact(ev) {
 
     ev.preventDefault();
+
+    console.log(ev)
 
     contactInfo.id = nanoid();
     contactInfo.createdAt = new Date();
@@ -60,7 +63,8 @@ function App() {
 
     }
 
-    formRef.current.reset();
+    formRef.current.reset()
+    console.log(formRef)
   }
 
   useEffect(() => {
@@ -103,7 +107,8 @@ function App() {
 
     setContacts(updatedContact);
 
-    formRef.current.reset();
+    formRef.current.reset()
+    console.log(formRef.current.reset())
   }
 
   return (
