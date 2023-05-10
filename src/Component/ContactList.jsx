@@ -5,7 +5,7 @@ export default function ContactList() {
     const componentData = useContext(LevelContext)
     const contacts = componentData[0]
     const handleDelete = componentData[1]
-    // console.log(handleDelete)
+    const getContact = componentData[2] 
 
     const list = contacts.map((el, idx) => {
         const bgs = ['#ebedf0', '#f6f8fa'];
@@ -23,12 +23,12 @@ export default function ContactList() {
                     </div>
                 </div>
                 <div className="d-flex flex-column">
-                    <span>{el.name}</span>
+                    <span className="text-dark">{el.name}</span>
                     <small className="text-muted">{el.number}</small>
                 </div>
             </div>
             <div className="d-flex align-items-center">
-                <span className="mx-2 pointer"><box-icon type='solid' name='edit-alt' color="purple"></box-icon></span>
+                <span className="mx-2 pointer" onClick={(ev) => getContact(ev, el.id)}><box-icon type='solid' name='edit-alt' color="purple"></box-icon></span>
                 <span className="mx-2 pointer" onClick={(ev) => handleDelete(ev, el.id)}><box-icon name='x' color="red"></box-icon></span>
             </div>
         </div>
@@ -36,7 +36,7 @@ export default function ContactList() {
     return (
         <div className="border-purple list">
             {
-                contacts.length === 0 ? <div>
+                contacts.length === 0 ? <div className="my-5">
                     <p className="text-center text-danger">Contact list is empty</p>
                 </div> : list
             }

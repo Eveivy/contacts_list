@@ -3,11 +3,7 @@
   src: url(/src/assets/PPNeueMachina-PlainUltrabold.otf);
 }
 body{
-  font-family: 'Neue Machina' !important;
-  display: flex;
-  /* flex-direction: column; */
-  align-self: center;
-  justify-content: center;
+  font-family: 'Neue Machina' !important; 
 }
 .border-purple{
   border: 3px solid purple;
@@ -36,6 +32,20 @@ body{
   font-size: 15px;
   color: white;
 }
+.btn-purple:hover{
+  background-color: purple !important;
+  font-size: 15px;
+  color: white;
+}
 .pointer{
   cursor: pointer;
 }
+.dark{
+  background-color: black;
+  color: aliceblue;
+}
+/* .main{
+  display: flex;
+    align-self: center;
+  justify-content: center;
+} */
